@@ -43,7 +43,7 @@ int main(void) {
         return 0;
     }
       c = 0;
-      char *directory[10];
+      char *directory[9];
       int m = 0;
       while ((de = readdir(d))){
           if ((de->d_type) & DT_DIR) {
@@ -61,7 +61,7 @@ int main(void) {
         return 0;
     }
       c = 0;
-      char *arr[10];
+      char *arr[9];
       int i = 0;
       while ((de = readdir(d))){                    
           //if (((de->d_type) & DT_REG))
@@ -80,6 +80,7 @@ int main(void) {
       printf("\n\tD Display Directories\n\tF Display Files\n\tE Edit File\n\tR Run A Program\n\tC Change Directory\n\tS Sort Directory listing\n"
              "\tM Move to Directory\n\tR Remove File\n\tQ Quit\n\n");
 
+      c = 0;
       printf("\n\nInsert a command from the operations\n");
       c = getchar( ); getchar( );
       switch (c) {
@@ -103,19 +104,34 @@ int main(void) {
                   chdir( cmd );
                   break;
         case 'D': printf("\nDisplaying Directory Files:\n");
-        for(i = 0; i < 4; i++)
-        {
-            printf("\nDirectory: %s", directory[i]);
-        }
-        break;
+                    for(i = 0; i < 4; i++)
+                    {
+                        printf("\nDirectory %d : %s", i, directory[i]);
+                    }
+                    break;
         case 'F': printf("Files:\n\n");
-        for(i = 0; i < 8; i++)
-        {
-            printf("\nFile: %s", arr[i]);
-        }
-        break;
+                    i = 0;
+                    while (arr[i] != NULL){
+                        printf("\nFile %d : %s", i, arr[i]);
+                        i++;
+                        if (i == 11){
+                            printf("\n\nEnd of list, type P for precous or Q to quit: ");
+                            k = getchar( ); getchar ( );
+                            if (k = 'Q')
+                                break;
+                        }
+
+                        if ((i % 5) == 0)
+                            {
+                                printf("\n\nType N for next or P for prevous: ");
+                                k = getchar( ); getchar();
+                                if (k == 'P')
+                                    i = i-10;
+                            }
+                    }
+                    break;
       printf( "\n-----------------------------------------\n" );
-                  break;
+        break;
       }
        
     }
