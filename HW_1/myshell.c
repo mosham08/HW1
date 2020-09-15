@@ -95,7 +95,7 @@ int main(void) {
                   scanf( "%s", cmd );
                   system( cmd );
                   break;
-        case 'C': printf( "Change To?:" );
+        case 'C': printf( "Change Directory To?:" );
                   scanf( "%s", cmd );
                   chdir( cmd );   
                   break;
@@ -115,7 +115,7 @@ int main(void) {
                         printf("\nFile %d : %s", i, arr[i]);
                         i++;
                         if (i == 11){
-                            printf("\n\nEnd of list, type P for precous or Q to quit: ");
+                            printf("\n\nEnd of list, press Q to quit: ");
                             k = getchar( ); getchar ( );
                             if (k = 'Q')
                                 break;
@@ -129,9 +129,7 @@ int main(void) {
                                     i = i-10;
                             }
                     }
-                    break;
       printf( "\n-----------------------------------------\n" );
-        break;
       }
        
     }
