@@ -77,7 +77,7 @@ void printDiskBlock(struct Disk *disk) {
 }
 
 int main() {
-
+// code to initialize the disk in memory (blocks or 256 bytes)
     initDisk();
 
     DIR *folder;
