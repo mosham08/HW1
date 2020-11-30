@@ -62,6 +62,7 @@ void loadFileInDisk(const char *fileName) {
     }
 }
 
+// initialize the Disk
 void initDisk() {
     size_t index;
     for (index = 0; index < MAX; ++index) {
