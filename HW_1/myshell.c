@@ -43,7 +43,7 @@ int main(void) {
         return 0;
     }
       c = 0;
-      char *directory[10];
+      char *directory[100];
       int m = 0;
       while ((de = readdir(d))){
           if ((de->d_type) & DT_DIR) {
@@ -61,7 +61,7 @@ int main(void) {
         return 0;
     }
       c = 0;
-      char *arr[10];
+      char *arr[100];
       int i = 0;
       while ((de = readdir(d))){                    
           //if (((de->d_type) & DT_REG))
@@ -103,17 +103,17 @@ int main(void) {
                   chdir( cmd );
                   break;
         case 'D': printf("\nDisplaying Directory Files:\n");
-        for(i = 0; i < 4; i++)
-        {
-            printf("\nDirectory: %s", directory[i]);
-        }
-        break;
+                    for(i = 0; i < 4; i++)
+                    {
+                        printf("\nDirectory: %s", directory[i]);
+                    }
+                    break;
         case 'F': printf("Files:\n\n");
-        for(i = 0; i < 8; i++)
-        {
-            printf("\nFile: %s", arr[i]);
-        }
-        break;
+                    for(i = 0; i < 8; i++)
+                    {
+                        printf("\nFile: %s", arr[i]);
+                    }
+                    break;
       printf( "\n-----------------------------------------\n" );
                   break;
       }
