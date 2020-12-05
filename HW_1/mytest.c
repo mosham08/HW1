@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define MAX_FILE_SIZE 847872
-#define MAX 1000000
+#define MAX_FILE_SIZE 847873
+#define MAX 10000000
 
 struct Disk {
     char data[256];
