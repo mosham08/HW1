@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define MAX_FILE_SIZE 4098
+#define MAX_FILE_SIZE 847872
 #define MAX 1000000
 
 struct Disk {
@@ -124,7 +124,7 @@ int main() {
 
     /* Read directory entries */
     int count = 0;
-    while ((entry = readdir(folder)) && count < 2) {
+    while ((entry = readdir(folder)) && count < 4) {
         stat(entry->d_name, &filestat);
         if (S_ISDIR(filestat.st_mode))
             printf("%4s: %s\t%s\n", "Dir", entry->d_name, ctime(&filestat.st_ctime));
