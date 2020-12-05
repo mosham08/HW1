@@ -93,6 +93,53 @@ void dumpDisk() {
     }
 }
 
+// creaetes a new file / or it should append to existing file
+void dumpDiskOutToBinFile(){
+    printf("write file to disk block=: %d \n", countUsedBlocks);
+    FILE *fp;
+    fp=fopen("test_moe.bin", "wb"); // write binary
+//    fwrite(disk, sizeof(struct Disk), 1, fp);
+    size_t index;
+    for (index = 0; index < countUsedBlocks; ++index) {
+        fwrite(disk[index], sizeof(struct Disk), 1, fp);
+    }
+    fclose(fp);
+}
+
+void readFileIntoMemory(){
+    printf("read file from memory: %s \n", "");
+    FILE *fp;
+    fp=fopen("test_moe.bin", "rb"); // read binary
+    if (!fp)
+    {
+        printf("Unable to open file!");
+        return 1;
+    }
+    struct Disk book;
+    int count =0;
+    while (1) {
+        fread(&book, sizeof(book), 1, fp);
+        if(feof(fp)) {
+            break;
+        }
+
+        printf("\nData: %s", book.data);
+        printf("\n");
+        count++;
+    }
+    printf("\nFinished. and counted %d \n", count);
+
+//    if (fp != NULL){
+//        size_t elementsRead = fread(disk, sizeof(struct Disk), 1, fp);
+//        printf("read file into memory 2: %ld \n", elementsRead);
+//        size_t index;
+//        for (index = 0; index < 1; ++index) {
+//            printDiskBlock(disk[index]);
+//        }
+//    }
+
+    fclose(fp);
+}
 // initialize the Disk
 void initDisk() {
     size_t index;
@@ -109,9 +156,12 @@ void printDiskBlock(struct Disk *disk) {
 }
 
 int main() {
-// code to initialize the disk in memory (blocks or 256 bytes)
-    initDisk();
+//
+//    readFileIntoMemory(); // from the bin file
+//
+//    return 0;
 
+    initDisk();
     DIR *folder;
     struct dirent *entry;
     struct stat filestat;
@@ -136,7 +186,9 @@ int main() {
         }
 
     }
-    dumpDisk();
+    dumpDisk(); // dump from the disk array memory
+    dumpDiskOutToBinFile();
+
     closedir(folder);
 }
 
