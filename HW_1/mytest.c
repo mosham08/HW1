@@ -115,19 +115,23 @@ void readFileIntoMemory(){
         printf("Unable to open file!");
         return 1;
     }
-    struct Disk book;
+    //struct Disk *diskRead[MAX];
+    struct Disk diskblock;
     int count =0;
     while (1) {
-        fread(&book, sizeof(book), 1, fp);
+        fread(&diskblock, sizeof(diskblock), 1, fp);
         if(feof(fp)) {
             break;
         }
 
-        printf("\nData: %s", book.data);
-        printf("\n");
+        disk[count] = &diskblock;
         count++;
     }
     printf("\nFinished. and counted %d \n", count);
+
+    for (int i1 = 0; i1 < count; i1++) {
+        printDiskBlock(disk[i1]);
+    }
 
 //    if (fp != NULL){
 //        size_t elementsRead = fread(disk, sizeof(struct Disk), 1, fp);
