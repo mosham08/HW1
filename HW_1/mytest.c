@@ -86,7 +86,7 @@ void loadFileInDisk(const char *fileName) {
 }
 
 void dumpDisk() {
-    printf("Dump disk files: %ld\n", countUsedBlocks);
+    printf("Dump disk files (blocks count): %ld\n", countUsedBlocks);
     size_t index;
     for (index = 0; index < countUsedBlocks; ++index) {
         printDiskBlock(disk[index]);
