@@ -7,7 +7,7 @@
 #include <math.h>
 
 #define MAX_FILE_SIZE 4098
-#define MAX 1000
+#define MAX 1000000
 
 struct Disk {
     char data[256];
@@ -26,6 +26,7 @@ struct Directory {
 //    disk->blocks = malloc(initialSize * sizeof(int));
 //}
 int whereToStart = 0;
+int countUsedBlocks = 0;
 void loadFileInDisk(const char *fileName) {
     char buffer[MAX_FILE_SIZE];
     printf("%4s: %s\n", "File", fileName);
@@ -51,10 +52,11 @@ void loadFileInDisk(const char *fileName) {
     int blocks = (int) ceil(value);
     printf("Size of the array: %ld  number of blocks: %d\n", j, blocks);
 
-
+    countUsedBlocks += blocks;
     index = 0; // to 256
     int countBlocks = whereToStart; // to number of blocks. WE have to figure out the next available block
-
+    printf("%4s: countBlocks %d\n", "blocks", countBlocks);
+    printf("%4s: whereToStart %d\n", "blocks", whereToStart);
     // initialize the blocks numbers array
     //initBlocksArray(@disk[countBlocks], blocks+1);
     // take every byte from the memory buffer and insert it into the corresponding block in the disk array
@@ -75,11 +77,19 @@ void loadFileInDisk(const char *fileName) {
 
     // countBlocks = 4
     // Next countBlocks = 5 //
-    whereToStart = countBlocks;
+    whereToStart = countBlocks + 1;
 
     printf("After loading files: %ld\n", index);
-    for (int i1 = 0; i1 < blocks; i1++) {
-        printDiskBlock(disk[i1]);
+//    for (int i1 = 0; i1 < blocks; i1++) {
+//        printDiskBlock(disk[i1]);
+//    }
+}
+
+void dumpDisk() {
+    printf("Dump disk files: %ld\n", countUsedBlocks);
+    size_t index;
+    for (index = 0; index < countUsedBlocks; ++index) {
+        printDiskBlock(disk[index]);
     }
 }
 
@@ -121,11 +131,12 @@ int main() {
         else {
             printf("%4s: %s\t%s\n", "File", entry->d_name, ctime(&filestat.st_ctime));
             loadFileInDisk(entry->d_name);
-            count ++;
+            count++;
 //            break;
         }
 
     }
+    dumpDisk();
     closedir(folder);
 }
 
